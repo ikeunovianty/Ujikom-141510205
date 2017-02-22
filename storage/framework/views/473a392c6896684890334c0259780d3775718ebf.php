@@ -8,27 +8,30 @@
 			 	<?php echo e(csrf_field()); ?>
 
       
-                    <div class="control-group">
-                        <label class="control-label">Tunjangan</label>
-                        <div class="controls">
-                            <select class="form-control" name="kode_tunjangan">
-                                <?php $__currentLoopData = $tunjangan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                <option value="<?php echo e($data->id); ?>"><?php echo e($data->kode_tunjangan); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                            </select>
-                        </div>
-                    </div>
+                    
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 control-label">Nip Pegawai</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="id_pegawai" >
+                                    <option>pilih</option>
+                                    <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                    <option value="<?php echo $data->id; ?>"><?php echo $data->nip; ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                </select>
+                            </div>
+                            </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Id Pegawai</label>
-                        <div class="controls">
-                            <select class="span11" name="id_pegawai">
-                                <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                <option value="<?php echo e($data->id); ?>"><?php echo e($data->User->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    <div class="form-group" >
+                         <label for="name" class="col-md-4 control-label">Uang Tunjangan</label>
+                         <div class="col-md-6">
+                            <select class="form-control" name="kode_tunjangan_id" >
+                            <option >Pilih</option>
+                            <?php $__currentLoopData = $tunjangan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                            <option value="<?php echo $data->id; ?>"><?php echo $data->besaran_uang; ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                             </select>
                         </div>
-                    </div>
+                      </div>
 
 				<div class="form-group">
 					<input class="btn btn-success" type="submit" name="submit" value="Tambah">

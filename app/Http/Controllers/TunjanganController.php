@@ -41,6 +41,8 @@ class TunjanganController extends Controller
      */
     public function store(Request $request)
     {
+        $jabatan=Request::all();
+        $golongan=Request::all();
         $tunjangan=Request::all();
         tunjangan::create($tunjangan);
         return redirect('tunjangan');

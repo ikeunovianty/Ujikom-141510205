@@ -7,6 +7,10 @@ use App\golongan;
 use App\pegawai;
 use App\kategori_lembur;
 use Form;
+use Validator;
+use alert;
+use Input;
+use redirect;
 
 class GolonganController extends Controller
 {
@@ -43,6 +47,30 @@ class GolonganController extends Controller
         $golongan=Request::all();
         golongan::create($golongan);
         return redirect('golongan');
+
+        $rules=['kode_golongan'=>'required|unique:golongans',
+                'nama_golongan'=>'required',
+                'besaran_uang'=>'required|numeric'];
+        $sms=['kode_golongan.required'=>'Harus Di Isi',
+                'kode_golongan.unique'=>'Tidak Boleh Sama',
+                'nama_golongan.required'=>'Harus Di Isi',
+                'besaran_uang.required'=>'Harus Diisi',
+                'besaran_uang.numeric'=>'Harus Angka'];
+        $valid=Validator::make(Input::all(),$rules,$sms);
+        if ($valid->fails()) {
+
+            alert()->error('Data Salah');  
+            return redirect('golongan/create')
+            ->withErrors($valid)
+            ->withInput();
+        }
+        else
+        {
+        alert()->success('Data Tersimpan');
+        $golongan=Request::all();
+        golongan::create($golongan);
+        return redirect('golongan');
+        }
     }
 
     /**
@@ -92,6 +120,7 @@ class GolonganController extends Controller
     public function destroy($id)
     {
         golongan::find($id)->delete();
+        alert()->success('Data Terhapus');
         return redirect('golongan');
     }
 }

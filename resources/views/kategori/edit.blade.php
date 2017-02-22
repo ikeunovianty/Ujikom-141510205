@@ -14,8 +14,8 @@
                     {!! Form::text('kode_lembur',null,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('nama_jabatan', 'Nama Jabatan') !!}
-                    {!! Form::text('nama_jabatan',null,['class'=>'form-control']) !!}
+                    {!! Form::label('$pegawai->User->name', 'Nama Jabatan') !!}
+                    {!! Form::text('$pegawai->User->name',null,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('nama_golongan', 'Nama Golongan') !!}

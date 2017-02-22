@@ -12,7 +12,7 @@
                     <div class="control-group">
                         <label class="control-label">Id Tunjangan Pegawai</label>
                         <div class="controls">
-                            <select class="form-control" name="tunjangan_pegawai">
+                            <select class="form-control" name="tunjangan_pegawai_id">
                                 @foreach ($tunjanganpegawai as $data)
                                 <option value="{{ $data->id }}">{{ $data->tunjangan_pegawai_id }}</option>
                                 @endforeach

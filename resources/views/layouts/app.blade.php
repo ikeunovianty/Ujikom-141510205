@@ -21,10 +21,13 @@
     </script>
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container-fluid">
+                <div class="row-fluid">
                 <div class="navbar-header">
+                    
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -33,6 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -45,6 +49,9 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
+                    <blockquote>
+
+                    </blockquote>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -74,29 +81,15 @@
 
                                 </ul>
                             </li>
-                            <li>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Daftar Halaman</a>
-                                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ url('/jabatan') }}"><i class="icon-pencil"></i> Jabatan</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/golongan') }}"><i class="icon-trash"></i> Golongan</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/kategori') }}"><i class="icon-trash"></i> Kategori Lembur</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/lemburpegawai') }}"><i class="icon-trash"></i> Lembur Pegawai</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/pegawai') }}"><i class="icon-trash"></i> Pegawai</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/tunjangan') }}"><i class="icon-trash"></i> Tunjangan</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/tunjanganpegawai') }}"><i class="icon-trash"></i> Tunjangan Pegawai</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ url('/penggajian') }}"><i class="icon-trash"></i> Penggajian</a></li>
-                                        </ul>
-                                </div>
-                            </li>
+
+                                
+    
+
+
+                                    
+                                
+
+
                         @endif
                     </ul>
                 </div>

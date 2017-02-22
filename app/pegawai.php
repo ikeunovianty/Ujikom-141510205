@@ -26,7 +26,7 @@ class pegawai extends Model
 
     public function tunjangan_pegawai()
     {
-        return $this->hasOne('App\tunjangan_pegawai','kode_tunjangan_id');
+        return $this->hasMany('App\tunjangan_pegawai','kode_tunjangan_id');
     }
     
 }

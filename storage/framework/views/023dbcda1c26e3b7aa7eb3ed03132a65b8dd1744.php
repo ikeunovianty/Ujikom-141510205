@@ -5,7 +5,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('pegawai.store')); ?>"enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('pegawai.store')); ?>" enctype="multipart/form-data">
                         <?php echo e(csrf_field()); ?>
 
 

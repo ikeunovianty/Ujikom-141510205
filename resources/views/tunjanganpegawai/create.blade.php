@@ -9,27 +9,30 @@
 			<form method="POST" action="{{url('tunjanganpegawai')}}">
 			 	{{csrf_field()}}
       
-                    <div class="control-group">
-                        <label class="control-label">Tunjangan</label>
-                        <div class="controls">
-                            <select class="form-control" name="kode_tunjangan">
-                                @foreach ($tunjangan as $data)
-                                <option value="{{ $data->id }}">{{ $data->kode_tunjangan }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 control-label">Nip Pegawai</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="id_pegawai" >
+                                    <option>pilih</option>
+                                    @foreach ($pegawai as $data)
+                                    <option value="{!!$data->id!!}">{!!$data->nip!!}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Id Pegawai</label>
-                        <div class="controls">
-                            <select class="span11" name="id_pegawai">
-                                @foreach ($pegawai as $data)
-                                <option value="{{ $data->id }}">{{ $data->User->name }}</option>
-                                @endforeach
+                    <div class="form-group" >
+                         <label for="name" class="col-md-4 control-label">Uang Tunjangan</label>
+                         <div class="col-md-6">
+                            <select class="form-control" name="kode_tunjangan_id" >
+                            <option >Pilih</option>
+                            @foreach($tunjangan as $data)
+                            <option value="{!! $data->id !!}">{!! $data->besaran_uang !!}</option>
+                            @endforeach
                             </select>
                         </div>
-                    </div>
+                      </div>
 
 				<div class="form-group">
 					<input class="btn btn-success" type="submit" name="submit" value="Tambah">

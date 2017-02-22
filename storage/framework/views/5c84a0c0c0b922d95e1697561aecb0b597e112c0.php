@@ -15,9 +15,9 @@
 
                 </div>
                 <div class="form-group">
-                    <?php echo Form::label('nama_jabatan', 'Nama Jabatan'); ?>
+                    <?php echo Form::label('$pegawai->User->name', 'Nama Jabatan'); ?>
 
-                    <?php echo Form::text('nama_jabatan',null,['class'=>'form-control']); ?>
+                    <?php echo Form::text('$pegawai->User->name',null,['class'=>'form-control']); ?>
 
                 </div>
                 <div class="form-group">

@@ -16,11 +16,10 @@ class Admin
     public function handle($request, Closure $next)
     {
 
-        if (auth()->check() && Request->Admin=='Admin')
+        if (auth()->check() && $request->user()->permission=='Admin') 
         {
-         return $next($request);   
+            return $next($request);
         }
-        
-        return redirect()->guest('/');
+        return redirect('/');
     }
 }
