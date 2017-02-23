@@ -6,6 +6,8 @@ use App\jabatan;
 use App\pegawai;
 use App\Form;
 use Request;
+use Input;
+use Validator;
 
 
 class JabatanController extends Controller
@@ -43,8 +45,28 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
         $jabatan=Request::all();
-        jabatan::create($jabatan);
-        return redirect('jabatan');
+         $rules=['kode_jabatan'=>'required|unique:jabatans',
+                 'nama_jabatan'=>'required|unique:jabatans',
+                 'besaran_uang'=>'required|unique:jabatans'];
+         $message=[
+                  'kode_jabatan.required'=>'Kolom Tidak Boleh Kosong','kode_jabatan.unique'=>'Masukan Sudah Ada',
+                  'nama_jabatan.required'=>'Kolom Tidak Boleh Kosong','nama_jabatan.unique'=>'Masukan Sudah Ada',
+                  'besaran_uang.required'=>'Kolom Tidak Boleh Kosong','besaran_uang.unique'=>'Masukan Sudah Ada'];
+         $validator=Validator::make(Input::all(),$rules,$message);
+
+        if ($validator->fails())
+         {
+            # code...
+            return redirect('/jabatan/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else
+        {
+         
+         jabatan::create($jabatan);
+         return redirect('jabatan');
+        }
     }
 
     /**
@@ -79,10 +101,62 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataUpdate=Request::all();
-        $jabatan=jabatan::find($id);
-        $jabatan->update($dataUpdate);
-        return redirect('jabatan');
+        $data=Request::all();
+        $kode=jabatan::where('id',$id)->first()->kode_jabatan;
+        $nama=jabatan::where('id',$id)->first()->nama_jabatan;
+        $uang=jabatan::where('id',$id)->first()->besaran_uang;
+
+        if($data['kode_jabatan'] !=$kode)
+        {
+          $rules=['kode_jabatan'=>'required|unique:jabatans',
+                 'nama_jabatan'=>'required',
+                 'besaran_uang'=>'required|numeric'];   
+        }
+        elseif ($data['nama_jabatan'] !=$nama) 
+        {
+            $rules=['kode_jabatan'=>'required',
+                 'nama_gokode_jabatanlongan'=>'required|unique:jabatans',
+                 'besaran_uang'=>'required|numeric'];   
+        }
+
+        elseif  ($data['besaran_uang'] !=$uang) 
+        {
+            $rules=['kode_jabatan'=>'required',
+                 'nama_jabatan'=>'required',
+                 'besaran_uang'=>'required|numeric|unique:jabatans'];   
+        }
+
+        else
+        {
+             $rules=['kode_jabatan'=>'required',
+                 'nama_jabatan'=>'required',
+                 'besaran_uang'=>'required|numeric'];            
+        }
+        
+        
+         $message=[
+         'kode_jabatan.unique'=>'Masukan Sudah Ada','kode_jabatan.required'=>'Kolom Jangan Kosong',
+         'nama_jabatan.unique'=>'Masukan Sudah Ada','nama_jabatan.required'=>'Kolom Jangan Kosong',
+         'besaran_uang.unique'=>'Masukan Sudah Ada','besaran_uang.required'=>'Kolom Jangan Kosong'];
+         $validator=Validator::make(Input::all(),$rules,$message);
+
+        if ($validator->fails())
+         {
+            # code...
+            return redirect('/jabatan/'.$id.'/edit')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else
+        {
+         jabatan::where('id',$id)->first()->update(
+            [
+                'kode_jabatan'=>$data['kode_jabatan'],
+                'nama_jabatan'=>$data['nama_jabatan'],
+                'besaran_uang'=>$data['besaran_uang']
+           ]);
+        }
+        return redirect('/jabatan');
     }
 
     /**

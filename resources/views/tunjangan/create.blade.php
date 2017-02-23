@@ -2,10 +2,10 @@
 
 @section('content')
 	
-<div class="container">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Tambah Data Tunjangan</div>
-		<div class="panel-body">
+<div class="col-md-9">
+        <div class="panel panel-info">
+        <div class="panel-heading"><h1><center><strong>Tambah Data Tunjangan</h1></strong></div>
+        <div class="panel-body">
 			<form method="POST" action="{{url('tunjangan')}}">
 			 	{{csrf_field()}}
 
@@ -15,7 +15,7 @@
                 </div>
 
                     <div class="control-group">
-                        <label class="control-label">Id Jabatan</label>
+                        <label class="control-label">Nama Jabatan</label>
                         <div class="controls">
                             <select class="span11" name="id_jabatan">
                                 @foreach ($jabatan as $data)
@@ -23,10 +23,10 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div><br>
 
                     <div class="control-group">
-                        <label class="control-label">Id Golongan</label>
+                        <label class="control-label">Nama Golongan</label>
                         <div class="controls">
                             <select class="span11" name="id_golongan">
                                 @foreach ($golongan as $data)
@@ -34,9 +34,9 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div><br>
 
-                    <div class="form-group">
+                <div class="form-group">
                     <label>Status</label>
                     <input class="form-control" type="text" name="status" placeholder="Status">
                 </div>

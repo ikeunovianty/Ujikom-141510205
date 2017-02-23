@@ -16,8 +16,10 @@ class TunjanganController extends Controller
      */
     public function index()
     {
-        $tunjangan = tunjangan::all();
-        return view ('tunjangan.index', compact('tunjangan'));
+         $tunjangan = tunjangan::all();
+         $jabatan = jabatan::all();
+         $golongan = golongan::all();
+        return view ('tunjangan.index', compact('tunjangan','jabatan','golongan'));
     }
 
     /**
@@ -26,8 +28,8 @@ class TunjanganController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $tunjangan = tunjangan::all();
+    { 
+         $tunjangan = tunjangan::all();
          $jabatan = jabatan::all();
          $golongan = golongan::all();
          return view ('tunjangan.create', compact('tunjangan','jabatan','golongan'));
@@ -41,8 +43,8 @@ class TunjanganController extends Controller
      */
     public function store(Request $request)
     {
-        $jabatan=Request::all();
-        $golongan=Request::all();
+        $jabatan=jabatan::all();
+        $golongan=golongan::all();
         $tunjangan=Request::all();
         tunjangan::create($tunjangan);
         return redirect('tunjangan');
@@ -67,8 +69,10 @@ class TunjanganController extends Controller
      */
     public function edit($id)
     {
+        $jabatan = jabatan::all();
+        $golongan = golongan::all();
         $tunjangan=tunjangan::find($id);
-        return view('tunjangan.edit',compact('tunjangan'));
+        return view('tunjangan.edit',compact('tunjangan','golongan','jabatan'));
     }
 
     /**

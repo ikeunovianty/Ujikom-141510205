@@ -6,6 +6,8 @@ use Request;
 use App\tunjangan_pegawai;
 use App\pegawai;
 use App\tunjangan;
+use App\jabatan;
+use App\golongan;
 
 class TunjanganpegawaiController extends Controller
 {
@@ -17,8 +19,11 @@ class TunjanganpegawaiController extends Controller
     public function index()
     {
         $tunjanganpegawai = tunjangan_pegawai::all();
-        $tunjangan = tunjangan::all();
-        return view ('tunjanganpegawai.index', compact('tunjanganpegawai','tunjangan'));
+        $tunjangann = tunjangan::all();
+        $jabatan = jabatan::all();
+        $golongan = golongan::all();
+        $pegawai = pegawai::all();
+        return view ('tunjanganpegawai.index', compact('tunjanganpegawai','tunjangann', 'pegawai','jabatan','golongan'));
     }
 
     /**
@@ -30,8 +35,10 @@ class TunjanganpegawaiController extends Controller
     {
          $tunjanganpegawai = tunjangan_pegawai::all();
          $tunjangan = tunjangan::all();
+         $jabatan = jabatan::all();
+         $golongan = golongan::all();
          $pegawai = pegawai::all();
-         return view ('tunjanganpegawai.create', compact('tunjanganpegawai','pegawai','tunjangan')); 
+         return view ('tunjanganpegawai.create', compact('tunjanganpegawai','pegawai','tunjangan','jabatan','golongan')); 
     }
 
     /**
@@ -44,6 +51,8 @@ class TunjanganpegawaiController extends Controller
     {
         $tunjanganpegawai=Request::all();
         $tunjangan = tunjangan::all();
+        $jabatan = jabatan::all();
+        $golongan = golongan::all();
         $pegawai = pegawai::all();
         tunjangan_pegawai::create($tunjanganpegawai);
         return redirect('tunjanganpegawai');
@@ -68,8 +77,12 @@ class TunjanganpegawaiController extends Controller
      */
     public function edit($id)
     {
+        $tunjangan = tunjangan::all();
+        $jabatan = jabatan::all();
+        $golongan = golongan::all();
+        $pegawai = pegawai::all();
         $tunjanganpegawai=tunjangan_pegawai::find($id);
-        return view('tunjanganpegawai.edit',compact('tunjanganpegawai'));
+        return view('tunjanganpegawai.edit',compact('tunjanganpegawai','jabatan','golongan','tunjangan','pegawai'));
     }
 
     /**

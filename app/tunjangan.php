@@ -21,6 +21,6 @@ class tunjangan extends Model
     }
     public function tunjangan_pegawai()
     {
-        return $this->hasMany('App\tunjangan_pegawai','id_tunjangan_pegawai');
+        return $this->hasMany('App\tunjangan_pegawai','kode_tunjangan');
     }
 }

@@ -18,8 +18,10 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = kategori_lembur::with('golongan','jabatan')->get();
-        return view ('kategori.index', compact('kategori'));
+        $kategori = kategori_lembur::all();
+        $jabatan=jabatan::all();
+        $golongan=golongan::all();
+        return view ('kategori.index', compact('kategori','jabatan','golongan'));
     }
 
     /**
@@ -66,9 +68,12 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+
+        $golongan = golongan::all();
+        $jabatan = jabatan::all();
         $kategori=kategori_lembur::find($id);
-        return view('kategori.edit',compact('kategori'));
+        return view('kategori.edit',compact('kategori','golongan','jabatan'));
     }
 
     /**

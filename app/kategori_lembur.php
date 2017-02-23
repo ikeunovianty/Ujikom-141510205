@@ -22,6 +22,6 @@ class kategori_lembur extends Model
     }
     public function lembur_pegawai()
     {
-    	return $this->hasOne('App\lembur_pegawai','kode_lembur_id');
+    	return $this->hasOne('App\lembur_pegawai','kode_lembur');
     }
 }

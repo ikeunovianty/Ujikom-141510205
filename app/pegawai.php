@@ -26,7 +26,12 @@ class pegawai extends Model
 
     public function tunjangan_pegawai()
     {
-        return $this->hasMany('App\tunjangan_pegawai','kode_tunjangan_id');
+        return $this->hasMany('App\tunjangan_pegawai','id_pegawai');
     }
+    public function lembur_pegawai()
+    {
+        return $this->hasMany('App\lembur_pegawai','id_pegawai');
+    }
+    
     
 }

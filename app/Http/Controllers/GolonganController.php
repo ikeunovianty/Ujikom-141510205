@@ -45,31 +45,27 @@ class GolonganController extends Controller
     public function store(Request $request)
     {
         $golongan=Request::all();
-        golongan::create($golongan);
-        return redirect('golongan');
+         $rules=['kode_golongan'=>'required|unique:golongans',
+                 'nama_golongan'=>'required|unique:golongans',
+                 'besaran_uang'=>'required|unique:golongans'];
+         $message=[
+         'kode_golongan.unique'=>'Masukan Sudah Ada','kode_golongan.required'=>'Kolom Tidak Boleh Kosong',
+         'nama_golongan.unique'=>'Masukan Sudah Ada','nama_golongan.required'=>'Kolom Tidak Boleh Kosong',
+         'besaran_uang.unique'=>'Masukan Sudah Ada','besaran_uang.required'=>'Kolom Tidak Boleh Kosong'];
+         $validator=Validator::make(Input::all(),$rules,$message);
 
-        $rules=['kode_golongan'=>'required|unique:golongans',
-                'nama_golongan'=>'required',
-                'besaran_uang'=>'required|numeric'];
-        $sms=['kode_golongan.required'=>'Harus Di Isi',
-                'kode_golongan.unique'=>'Tidak Boleh Sama',
-                'nama_golongan.required'=>'Harus Di Isi',
-                'besaran_uang.required'=>'Harus Diisi',
-                'besaran_uang.numeric'=>'Harus Angka'];
-        $valid=Validator::make(Input::all(),$rules,$sms);
-        if ($valid->fails()) {
-
-            alert()->error('Data Salah');  
-            return redirect('golongan/create')
-            ->withErrors($valid)
+        if ($validator->fails())
+         {
+            # code...
+            return redirect('/golongan/create')
+            ->withErrors($validator)
             ->withInput();
         }
         else
         {
-        alert()->success('Data Tersimpan');
-        $golongan=Request::all();
-        golongan::create($golongan);
-        return redirect('golongan');
+         
+         golongan::create($golongan);
+         return redirect('golongan');
         }
     }
 
@@ -105,10 +101,63 @@ class GolonganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataUpdate=Request::all();
-        $golongan=golongan::find($id);
-        $golongan->update($dataUpdate);
-        return redirect('golongan');
+        $data=Request::all();
+        $kode=golongan::where('id',$id)->first()->kode_golongan;
+        $nama=golongan::where('id',$id)->first()->nama_golongan;
+        $uang=golongan::where('id',$id)->first()->besaran_uang;
+
+        if($data['kode_golongan'] !=$kode)
+        {
+          $rules=['kode_golongan'=>'required|unique:golongans',
+                 'nama_golongan'=>'required',
+                 'besaran_uang'=>'required|numeric'];   
+        }
+        elseif ($data['nama_golongan'] !=$nama) 
+        {
+            $rules=['kode_golongan'=>'required',
+                 'nama_golongan'=>'required|unique:golongans',
+                 'besaran_uang'=>'required|numeric'];   
+        }
+
+        elseif  ($data['besaran_uang'] !=$uang) 
+        {
+            $rules=['kode_golongan'=>'required',
+                 'nama_golongan'=>'required',
+                 'besaran_uang'=>'required|numeric|unique:golongans'];   
+        }
+
+        else
+        {
+             $rules=['kode_golongan'=>'required',
+                 'nama_golongan'=>'required',
+                 'besaran_uang'=>'required|numeric'];            
+        }
+        
+        
+         $message=[
+         'kode_golongan.unique'=>'Masukan Sudah Ada','kode_golongan.required'=>'Kolom Jangan Kosong',
+         'nama_golongan.unique'=>'Masukan Sudah Ada','nama_golongan.required'=>'Kolom Jangan Kosong',
+         'besaran_uang.unique'=>'Masukan Sudah Ada','besaran_uang.required'=>'Kolom Jangan Kosong'];
+         $validator=Validator::make(Input::all(),$rules,$message);
+
+        if ($validator->fails())
+         {
+            # code...
+            return redirect('/golongan/'.$id.'/edit')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else
+        {
+         golongan::where('id',$id)->first()->update(
+            [
+                'kode_golongan'=>$data['kode_golongan'],
+                'nama_golongan'=>$data['nama_golongan'],
+                'besaran_uang'=>$data['besaran_uang']
+           ]);
+        }
+        return redirect('/golongan');
+
     }
 
     /**
