@@ -25,7 +25,7 @@
                             <label for="nama_golongan" class="col-md-4 control-label">Nama Golongan</label>
                             <div class="col-md-6">
                             <div class="form-group <?php echo e($errors->has('nama_golongan') ? 'has-errors':'message'); ?>" >
-                                <input id="nama_golongan" type="text" class="form-control" name="nama_golongan" value="<?php echo e(old('nama_golongan')); ?>" placeholder="Masukkan Kode Golongan" autofocus>
+                                <input id="nama_golongan" type="text" class="form-control" name="nama_golongan" value="<?php echo e(old('nama_golongan')); ?>" placeholder="Masukkan Nama Golongan" autofocus>
                              <?php if($errors->has('nama_golongan')): ?>
                                 <span class="help-block">
                                     <strong><?php echo e($errors->first('nama_golongan')); ?></strong>
@@ -39,7 +39,7 @@
                             <label for="besaran_uang" class="col-md-4 control-label">Besaran Uang</label>
                             <div class="col-md-6">
                             <div class="form-group <?php echo e($errors->has('besaran_uang') ? 'has-errors':'message'); ?>" >
-                                <input id="besaran_uang" type="text" class="form-control" name="besaran_uang" value="<?php echo e(old('besaran_uang')); ?>" placeholder="Masukkan Kode Golongan" autofocus>
+                                <input id="besaran_uang" type="text" class="form-control" name="besaran_uang" value="<?php echo e(old('besaran_uang')); ?>" placeholder="Masukkan Besaran Uang" autofocus>
                              <?php if($errors->has('besaran_uang')): ?>
                                 <span class="help-block">
                                     <strong><?php echo e($errors->first('besaran_uang')); ?></strong>
@@ -51,7 +51,7 @@
 
 				<div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" >
+                                <button type="submit" class="btn btn-success" >
                                     Simpan
                                 </button>
                             </div>

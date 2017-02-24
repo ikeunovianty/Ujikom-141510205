@@ -1,58 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="col-md-9">
+    <div class="col-md-9">
         <div class="panel panel-info">
         <div class="panel-heading"><h1><center><strong>Edit Data Kategori Lembur</h1></strong></div>
         <div class="panel-body">
-
-                <div class="panel-body">
-                    {!! Form::model($kategori,['method' => 'PATCH','route'=>['kategori.update',$kategori->id]]) !!}
-                <div class="form-group">
-                    <div class="col-md-4 control-label">
-                    {!! Form::label('kode_lembur', 'Kode Lembur') !!}
-                    {!! Form::text('kode_lembur',null,['class'=>'form-control']) !!}
-                </div></div>
-
-                <div class="form-group">
-                            <label for="name" class="col-md-4 control-label">Nama Golongan </label>
-                            <div class="col-md-4">
-                            <div class="form-group {{$errors->has('nama_golongan') ? 'has-errors':'message'}}" >
-                            <select class="form-control" name="id_golongan" >
-                            
-                            @foreach($golongan as $data)
-                            <option value="{!! $data->id !!}">{!! $data->nama_golongan !!}</option>
-                            @endforeach
+                <form class="form-horizontal" action="{{route('kategori.update', $kategori_lembur->id)}}" method="POST">
+                <input name="_method" type="hidden" value="PATCH">
+                    {{csrf_field()}}
+                    <div class="form-group{{ $errors->has('kode_lembur') ? ' has-error' : '' }}">
+                            <label for="kode_lembur" class="col-md-4 control-label">Kode lembur :</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="kode_lembur" value="{{$kategori_lembur->kode_lembur}}" class="form-control">
+                                    @if ($errors->has('kode_lembur'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kode_lembur') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('id_jabatan') ? ' has-error' : '' }}">
+                            <label for="id_jabatan" class="col-md-4 control-label">Nama Jabatan :</label>
+                                <div class="col-md-6">
+                                    <select name="id_jabatan" class="form-control">
+                                @foreach ($jabatan as $jabatans)
+                                <option value="{{$jabatans->id}}" <?php if ($data->id_jabatan==$jabatans->id) {echo "selected";} ?>>{{$jabatans->nama_jabatan}}</option>
+                                @endforeach
                             </select>
-                            </div>
-                            </div>
-                <div class="form-group">
-                            <label for="name" class="col-md-4 control-label">Nama Jabatan </label>
-                            <div class="col-md-4">
-                            <div class="form-group {{$errors->has('nama_jabatan') ? 'has-errors':'message'}}" >
-                            <select class="form-control" name="id_jabatan" >
-                            
-                            @foreach($jabatan as $data)
-                            <option value="{!! $data->id !!}">{!! $data->nama_jabatan !!}</option>
-                            @endforeach
+                                    @if ($errors->has('id_jabatan'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('id_jabatan') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('id_golongan') ? ' has-error' : '' }}">
+                            <label for="id_golongan" class="col-md-4 control-label">Nama Golongan :</label>
+                                <div class="col-md-6">
+                            <select name="id_golongan" class="form-control">
+                                @foreach ($golongan as $golongans)
+                                <option value="{{$golongans->id}}" <?php if ($data->id_golongan==$golongans->id) {echo "selected";} ?>>{{$golongans->nama_golongan}}</option>
+                                @endforeach
                             </select>
-                            </div>
-                            </div>
-                <div class="form-group">
-                    <div class="col-md-4 control-label">
-                    {!! Form::label('besaran_uang', 'Besaran uang') !!}
-                    {!! Form::text('besaran_uang',null,['class'=>'form-control']) !!}
-                </div></div>
-
-                <div class="form-group">
-                    <div class="col-md-4 control-label">
-                    {!! Form::submit('SIMPAN', ['class' => 'btn btn-primary']) !!}
-                </div></div>
-                {!! Form::close() !!}
-                </div>
-              </div>
-            </div>
-          </div>
+                                </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : '' }}">
+                            <label for="besaran_uang" class="col-md-4 control-label">Besaran Uang :</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="besaran_uang" value="{{$kategori_lembur->besaran_uang}}" class="form-control">
+                                    @if ($errors->has('besaran_uang'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('besaran_uang') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4" >
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+                        </div>
+                    </div>
+                </form>
         </div>
     </div>
 </div>

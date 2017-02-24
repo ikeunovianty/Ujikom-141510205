@@ -2,67 +2,50 @@
 
 @section('content')
 	
-<div class="container">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Tambah Data Penggajian</div>
-		<div class="panel-body">
-			<form method="POST" action="{{url('penggajian')}}">
-			 	{{csrf_field()}}
-      
-                    <div class="control-group">
-                        <label class="control-label">Id Tunjangan Pegawai</label>
-                        <div class="controls">
-                            <select class="form-control" name="tunjangan_pegawai_id">
-                                @foreach ($tunjanganpegawai as $data)
-                                <option value="{{ $data->id }}">{{ $data->tunjangan_pegawai_id }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+<div class="col-md-9">
+        <div class="panel panel-info">
+        <div class="panel-heading" class="fa fa-paw" aria-hidden="true"><h1><center><strong>Tambah Data Penggajian</h1></strong></div>
+        <div class="panel-body">
+
+        <form class="form-horizontal" action="{{route('penggajian.store')}}" method="POST">
+                    <div class="form-group{{ $errors->has('id_pegawai') ? ' has-error' : '' }}">
+                            <label for="id_pegawai" class="col-md-4 control-label"> Pegawai :</label>
+                                <div class="col-md-6">
+                                    <select type="text" name="id_pegawai" class="form-control">
+                                        <option value="">Pilih</option>
+                                        @foreach($pegawai as $data)
+                                        <option value="{!! $data->id !!}">{!! $data->nip !!}_{!! $data->User->name !!}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_pegawai'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('id_pegawai') }}</strong>
+                                    </span>
+                                @endif
+                                @if (isset($_GET['errors_match']))
+                            <span class="help-block">
+                                    <strong>Pegawai sudah melakukan penggajian bulan ini</strong>
+                            </span>
+                            @endif
+                            @if (isset($missing_count))
+                            <div style="width: 100%;color: red;text-align: center;">
+                                Tunjangan Pegawai InI Tidak Ada <a href="{{url('tunjanganpegawai/create')}}">disini</a>
+                            </div>
+                            @endif
+                                </div>
                     </div>
-
-                    <div class="control-group">
-                        <label>Jumlah Jam Lembur </label>
-                       <input class="form-control" type="text" name="jumlah_jam_lembur" placeholder="Masukkan Jumlah Jam">
-                    
-                    </div>
-                    
-				<div class="form-group">
-					<label>Jumlah Uang Lembur</label>
-					<input class="form-control" type="text" name="jumlah_uang_lembur" placeholder="Masukkan Uang Lembur">
-				</div>
-
-                <div class="form-group">
-                    <label>Gaji Pokok</label>
-                    <input class="form-control" type="text" name="gaji_pokok" placeholder="Masukkan Gaji Pokok">
-                </div>
-
-                 <div class="form-group">
-                    <label>Total Gaji</label>
-                    <input class="form-control" type="text" name="total_gaji">
-                </div>
-
-                 <div class="form-group">
-                    <label>Tanggal Pengambilan</label>
-                    <input class="form-control" type="date" name="tanggal_pengembalian">
-                </div>
-
-                 <div class="form-group">
-                    <label>Status Pengambilan</label>
-                    <input class="form-control" type="text" name="status_pengambilan" placeholder="Masukkan Status Pengambilan">
-                </div>
-
-                 <div class="form-group">
-                    <label>Petugas Penerima</label>
-                    <input class="form-control" type="text" name="petugas_penerima" placeholder="Masukkan Tugas Penerima">
-                </div>
-
-				<div class="form-group">
-					<input class="btn btn-success" type="submit" name="submit" value="Tambah">
-				</div>
-			</form>
-		</div>
-	</div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-4" >
+              <button type="submit" class="btn btn-success">
+                Simpan
+              </button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
 </div>
+
 <div class="col-md-3 ">
    <div class="panel panel-default">
        <div class="panel-heading">
@@ -123,4 +106,4 @@
        </div>
    </div>
 </div>
-@stop
+@endsection

@@ -1,11 +1,11 @@
 <?php $__env->startSection('content'); ?>
-	
+  
 <div class="col-md-9">
         <div class="panel panel-info">
         <div class="panel-heading"><h1><center><strong>Tambah Tunjangan Pegawai</h1></strong></div>
         <div class="panel-body">
-			<form method="POST" action="<?php echo e(url('tunjanganpegawai')); ?>">
-			 	<?php echo e(csrf_field()); ?>
+      <form method="POST" action="<?php echo e(url('tunjanganpegawai')); ?>">
+        <?php echo e(csrf_field()); ?>
 
       
                     
@@ -32,13 +32,16 @@
                                 </select>
                             </div>
                         </div>
-
-				<div class="form-group">
-					<input class="btn btn-success" type="submit" name="submit" value="Tambah">
-				</div>
-			</form>
-		</div>
-	</div>
+                        <div class="form-group">
+            <div class="col-md-6 col-md-offset-4" >
+              <button type="submit" class="btn btn-success">
+                Simpan
+              </button>
+            </div>
+          </div>
+            </center>
+       </div>
+   </div>
 </div>
 <div class="col-md-3 ">
    <div class="panel panel-default">
@@ -102,4 +105,5 @@
    </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

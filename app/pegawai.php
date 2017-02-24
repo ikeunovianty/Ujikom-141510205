@@ -8,8 +8,8 @@ class pegawai extends Model
 {
     //
     protected $table = 'pegawais';
-    protected $fillable = array('nip','name','email','id_jabatan','id_golongan','foto');
-    protected $visible = array('nip','name','email','id_jabatan','id_golongan','foto');
+    protected $fillable = array('nip','id_user','id_jabatan','id_golongan','foto');
+    protected $visible = array('nip','id_user','id_jabatan','id_golongan','foto');
 
     public function User()
     {

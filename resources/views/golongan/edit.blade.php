@@ -54,7 +54,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     Simpan
                                 </button>
                             </div>

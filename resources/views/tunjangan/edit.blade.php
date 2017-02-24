@@ -5,86 +5,61 @@
         <div class="panel panel-info">
         <div class="panel-heading"><h1><center><strong>Edit Data Tunjangan</h1></strong></div>
         <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('tunjangan.update',$tunjangan->id) }}">
-                        <input name="_method" type="hidden" value="PATCH">
-                        {{ csrf_field() }}
-                            
-                            
-                            
-                            <div class="form-group">
-                            <label for="kode_tunjangan" class="col-md-4 control-label">Kode Tunjangan </label>
-                            <div class="col-md-4">
-                            <div class="form-group {{$errors->has('kode_tunjangan') ? 'has-errors':'message'}}" >
-                            <select class="form-control" name="kode_tunjangan" >
-                            @foreach($tunjangan as $data)
-                            <option value="{!! $data->id !!}">{!! $data->tunjangan->kode_tunjangan !!}</option>
-                            @endforeach
+
+                
+                    {!! Form::model($tunjangan,['method' => 'PATCH','route'=>['tunjangan.update',$tunjangan->id]]) !!}
+                <div class="form-group">
+                    {!! Form::label('kode_tunjangan', 'Kode Tunjangan : ') !!}
+                    {!! Form::text('kode_tunjangan',null,['class'=>'form-control']) !!}
+                </div>
+
+                 <div class="control-group">
+                        <label class="control-label">Id Jabatan</label>
+                        <div class="controls">
+                            <select class="span11" name="id_jabatan">
+                                @foreach ($jabatan as $data)
+                                <option value="{{ $data->id }}">{{ $data->nama_jabatan }}</option>
+                                @endforeach
                             </select>
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="id_golongan" class="col-md-4 control-label">Nama Golongan </label>
-                            <div class="col-md-4">
-                            <div class="form-group {{$errors->has('id_golongan') ? 'has-errors':'message'}}" >
-                            <select class="form-control" name="id_golongan" >
-                            @foreach($golongan as $data)
-                            <option value="{!! $data->id !!}">{!! $data->nama_golongan !!}</option>
-                            @endforeach
-                            </select>
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="id_jabatan" class="col-md-4 control-label">Nama Jabatan </label>
-                            <div class="col-md-4">
-                            <div class="form-group {{$errors->has('id_jabatan') ? 'has-errors':'message'}}" >
-                            <select class="form-control" name="id_jabatan" > 
-                            @foreach($jabatan as $data)
-                            <option value="{!! $data->id !!}">{!! $data->nama_jabatan !!}</option>
-                            @endforeach
-                            </select>
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="status" class="col-md-4 control-label">Status</label>
-                            <div class="col-md-6">
-                            <select class="form-control" name="status" required>
-                            <option>Pilih</option>
-                            <option>Menikah</option>
-                            <option>Lajang</option>
-                                </select>
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="jumlah_anak" class="col-md-4 control-label">Jumlah Anak</label>
-                            <div class="col-md-6">
-                                <input id="jumlah_anak" type="text" class="form-control" name="jumlah_anak" value="{{ $tunjangan->jumlah_anak}}" required autofocus>
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="besaran_uang" class="col-md-4 control-label">Besaran Uang</label>
-                            <div class="col-md-6">
-                                <input id="besaran_uang" type="text" class="form-control" name="besaran_uang" value="{{ $tunjangan->besaran_uang}}" required autofocus>
-                            </div>
-                            </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Simpan
-                                </button>
-                            </div>
                         </div>
-                    </form>
+                    </div>
+
+                <div class="control-group">
+                        <label class="control-label">Id Golongan</label>
+                        <div class="controls">
+                            <select class="span11" name="id_golongan">
+                                @foreach ($golongan as $data)
+                                <option value="{{ $data->id }}">{{ $data->nama_golongan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                 <div class="form-group">
+                    {!! Form::label('jumlah_anak', 'Jumlah anak : ') !!}
+                    {!! Form::text('jumlah_anak',null,['class'=>'form-control']) !!}
+                </div>
+
+                 <div class="form-group">
+                    {!! Form::label('status', 'Status : ') !!}
+                    {!! Form::text('status',null,['class'=>'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('besaran_uang', 'Besaran Uang : ') !!}
+                    {!! Form::text('besaran_uang',null,['class'=>'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::submit('SAVE', ['class' => 'btn btn-primary']) !!}
+                </div>
+                {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="col-md-3 ">
    <div class="panel panel-default">
        <div class="panel-heading">

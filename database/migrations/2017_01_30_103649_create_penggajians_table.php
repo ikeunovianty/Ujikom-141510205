@@ -15,14 +15,15 @@ class CreatePenggajiansTable extends Migration
     {
         Schema::create('penggajians', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tunjangan_pegawai_id')->nullable();
-            $table->foreign('tunjangan_pegawai_id')->references('id')->on('tunjangan_pegawais')->onDelete('Cascade')->onUpdate('Cascade');
+            $table->integer('tunjangan_pegawai_id')->unsigned();
+            $table->foreign('tunjangan_pegawai_id')->references('id')->on('tunjangan_pegawais')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->integer('jumlah_jam_lembur');
             $table->integer('jumlah_uang_lembur');
             $table->integer('gaji_pokok');
-            $table->date('tanggal_pengambilan');
-            $table->boolean('status_pengambilan')->default(0);
-            $table->string('petugas_penerima');            
+            $table->integer('total_gaji');
+            $table->date('tanggal_pengambilan')->nullable();
+            $table->boolean('status_pengambilan')->nullable();
+            $table->string('petugas_penerima')->nullable();
             $table->timestamps();
         });
     }
