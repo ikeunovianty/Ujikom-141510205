@@ -12,13 +12,14 @@
                     </p>
                 </form>
         <a class="btn btn-success" href="<?php echo e(url('lemburpegawai/create')); ?>">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr class="bg-primary">
                         <th>Id</th>
                         <th>Id Kode Lembur</th>
                         <th>Nama Pegawai</th>
                         <th>Jumlah Jam</th>
+                        <th>Besaran Uang</th>
                         <th colspan="3"><center>Opsi</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                         <td> <?php echo e($data->kategori_lembur->kode_lembur); ?> </td>
                         <td> <?php echo e($data->pegawai->User->name); ?></td>
                         <td> <?php echo e($data->jumlah_jam); ?></td>
+                        <td>Rp.<?php echo e($data->besaran_uang); ?></td>
                         <td><a href="<?php echo e(route('lemburpegawai.edit',$data->id)); ?>" class="btn btn-warning">Edit</a></td>
                         <td ><a data-toggle="modal" href="#delete<?php echo e($data->id); ?>" class="btn btn-danger" title="Delete" data-toggle="tooltip">Hapus</a>
                         <?php echo $__env->make('modals.delete', ['url' => route('lemburpegawai.destroy', $data->id),'model' => $data], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

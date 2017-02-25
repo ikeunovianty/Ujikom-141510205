@@ -12,22 +12,22 @@
                         <input name="_method" type="hidden" value="PATCH">
                         {{csrf_field()}}
                         <div class="form-group">
-                        <label for="kode_jabatan" class="col-md-4 control-label">Kode Jabatan </label>
+                        <label for="kode_jabatan" class="col-md-6 control-label">Kode Jabatan </label>
                             <input type="text" name="jabatan" class="form-control"  value="{{$jabatan->kode_jabatan}}" >
                         </div>
 
                         <div class="form-group">
-                            <label for="nama_jabatan" class="col-md-4 control-label">Nama Jabatan</label>
+                            <label for="nama_jabatan" class="col-md-6 control-label">Nama Jabatan</label>
                             <input type="text" name="nama_jabatan" class="form-control" value ="{{$jabatan->nama_jabatan}}" >
                         </div>
 
                         <div class="form-group">
-                            <label for="besaran_uang" class="col-md-4 control-label">Besaran Uang</label>
+                            <label for="besaran_uang" class="col-md-6 control-label">Besaran Uang</label>
                             <input type="text" name="besaran_uang" class="form-control" value ="{{$jabatan->besaran_uang}}" >
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-primary">
                                     Simpan
                                 </button>
                             </div>

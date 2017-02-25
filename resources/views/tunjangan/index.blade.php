@@ -1,4 +1,4 @@
-@extends('layouts.app')
+  @extends('layouts.app')
 
 @section('content')
 
@@ -14,7 +14,7 @@
                     <button type="submit" class="btn btn-success">Pencarian</button>
                 </p></form>
         <a class="btn btn-success" href="{{url('tunjangan/create')}}">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr class="bg-primary">
                         <th>Id</th>

@@ -8,7 +8,7 @@ use App\golongan;
 use App\jabatan;
 use Validator;
 use Input;
-use Alert;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -76,14 +76,14 @@ $rules = [  'name' => 'required|max:255',
         $valid=Validator::make(Input::all(),$rules,$sms);
         if ($valid->fails()) {
 
-            alert()->error('Data Salah');  
+
             return redirect('pegawai/create')
             ->withErrors($valid)
             ->withInput();
         }
         else
         {
-        alert()->success('Data Tersimpan');
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -174,7 +174,7 @@ $rules = [  'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'permission' => 'required',
             'password' => 'required|min:6',
-            'nip'=>'required|unique:pegawais',
+            'nip'=>'required|max:255|unique:pegawais',
             'id_jabatan' => 'required',
             'id_golongan' => 'required',
             'foto' => 'required',
@@ -250,7 +250,7 @@ $rules = [  'name' => 'required|max:255',
     public function destroy($id)
     {
         pegawai::find($id)->delete();
-        alert()->success('Data Terhapus');
+
         return redirect('pegawai');
     }
 }

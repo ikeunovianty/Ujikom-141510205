@@ -11,7 +11,7 @@
                     <button type="submit" class="btn btn-info">Pencarian</button>
                 </p></form>
         <a class="btn btn-success" href="<?php echo e(url('pegawai/create')); ?>">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr class="bg-primary">
                         <th>Id</th>
@@ -35,7 +35,7 @@
                         <td> <?php echo e($data->User->email); ?> </td>
                         <td> <?php echo e($data->jabatan->nama_jabatan); ?> </td>
                         <td> <?php echo e($data->golongan->nama_golongan); ?> </td>
-                        <td><img src="<?php echo e(asset('/account/foto/'.$data->foto.'')); ?>" height="100px" width="100px"></td>
+                        <td><img src="<?php echo e(asset('/account/foto/'.$data->foto.'')); ?>" class="img-rounded" alt="Cinque Terre" width="100" height="100"></td>
                         <td><a href="<?php echo e(route('pegawai.edit',$data->id)); ?>" class="btn btn-warning">Edit</a></td>
                         <td ><a data-toggle="modal" href="#delete<?php echo e($data->id); ?>" class="btn btn-danger" title="Delete" data-toggle="tooltip">Hapus</a>
                         <?php echo $__env->make('modals.delete', ['url' => route('pegawai.destroy', $data->id),'model' => $data], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

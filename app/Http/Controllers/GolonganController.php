@@ -8,7 +8,6 @@ use App\pegawai;
 use App\kategori_lembur;
 use Form;
 use Validator;
-use alert;
 use Input;
 use redirect;
 
@@ -169,7 +168,6 @@ class GolonganController extends Controller
     public function destroy($id)
     {
         golongan::find($id)->delete();
-        alert()->success('Data Terhapus');
         return redirect('golongan');
     }
 }

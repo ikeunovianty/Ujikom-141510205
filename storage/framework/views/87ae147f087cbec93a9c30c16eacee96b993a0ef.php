@@ -13,7 +13,7 @@
                     <button type="submit" class="btn btn-success">Pencarian</button>
                 </p></form>        
                 <a class="btn btn-success" href="<?php echo e(url('jabatan/create')); ?>">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                     <link rel="stylesheet" type="text/css" href="style.css">
                     <tr class="bg-primary">

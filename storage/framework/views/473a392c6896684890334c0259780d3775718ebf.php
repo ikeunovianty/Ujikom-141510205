@@ -1,49 +1,33 @@
 <?php $__env->startSection('content'); ?>
   
-<div class="col-md-9">
+<div class="col-md-7">
         <div class="panel panel-info">
         <div class="panel-heading"><h1><center><strong>Tambah Tunjangan Pegawai</h1></strong></div>
         <div class="panel-body">
       <form method="POST" action="<?php echo e(url('tunjanganpegawai')); ?>">
-        <?php echo e(csrf_field()); ?>
+        <div class="form-group<?php echo e($errors->has('kode_tunjangan') ? ' has-error' : ''); ?>">
+                            <label>Kode Tunjangan</label>
+                    <select name="kode_tunjangan_id" class="form-control" required>
+                        <?php $__currentLoopData = $tunjangan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                        <option value="<?php echo e($data->id); ?>"><?php echo e($data->kode_tunjangan); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    </select><br>
+                    <label>Nama Pegawai</label>
+                    <select name="id_pegawai" class="form-control" required>
+                        <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                        <option value="<?php echo e($data->id); ?>"><?php echo e($data->User->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    </select><br>
+                        <div class="col-md-6 col-md-offset-4">
+                    <input class="btn btn-success" type="submit" name="submit" value="Simpan">
+                </div>
 
-      
-                    
-                        <div class="form-group">
-                            <label for="kode_tunjangan" class="col-md-4 control-label">Kode Tunjangan</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="kode_tunjangan" >
-                                    <option>pilih</option>
-                                    <?php $__currentLoopData = $tunjangan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                    <option value="<?php echo $data->id; ?>"><?php echo $data->kode_tunjangan; ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name" class="col-md-4 control-label">Nama Pegawai</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="id_pegawai" >
-                                    <option>pilih</option>
-                                    <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                    <option value="<?php echo $data->id; ?>"><?php echo $data->User->name; ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-            <div class="col-md-6 col-md-offset-4" >
-              <button type="submit" class="btn btn-success">
-                Simpan
-              </button>
-            </div>
-          </div>
             </center>
        </div>
    </div>
 </div>
-<div class="col-md-3 ">
+</div>
+<div class="col-md-4 ">
    <div class="panel panel-default">
        <div class="panel-heading">
            <center>

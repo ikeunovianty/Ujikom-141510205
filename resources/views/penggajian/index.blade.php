@@ -14,21 +14,50 @@
                     <button type="submit" class="btn btn-success">Pencarian</button>
                 </p></form>
           <a class="btn btn-success" href="{{url('penggajian/create')}}">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                 <tr class="success">
-                  <th>Nama Pegawai</th>
-                  <th>Tunjangan Pegawai</th>
-                  <th>NIP Pegawai</th>
-                  <th colspan="3"><center>Aksi</center></th>
+                
+                          <td>Id</td>
+                          <td>Pegawai</td>
+                          <td>Jumlah Jam Lembur</td>
+                          <td>Jumlah Uang Lembur</td>
+                          <td>Gaji Pokok</td>
+                          <td>Total Gaji</td>
+                          <td>Tanggal Pengambilan</td>
+                          <td>Status Pengambilan</td>
+                          <td>Petugas Penerima</td>
+                          
+                        
+                  <th colspan="3"><center>Opsi</center></th>
                 </tr>
               </thead>
               <tbody>
-              @foreach($penggajian as $data)
-                <tr>
-                  <td>{{$users->name}}</td>
-                  <td>{{$tunjangan->besaran_uang}}</td>
-                  <td>{{$pegawai->nip}}</td>
+
+                <?php $id=1; ?>
+              @foreach($gajian as $data)
+                <tbody>
+                                <tr>
+                                    <td>{{$id++}}</td>
+                                    <td>{{$data->tunjanganpegawai->pegawai->User->name}}</td>
+                                    <td>{{$data->jumlah_jam_lembur}} </td>
+                                    <td>{{$data->jumlah_uang_lembur}} </td>
+                                    <td>{{$data->gaji_pokok}} </td>
+                                    <td>{{$data->total_gaji}} </td>
+                                    <td>{{$data->updated_at}} </td>
+                                    
+                                    @if($data->status_pengambilan == 0)
+                                    
+                                        <td>Belum Diambil </td>
+                                    
+                                    @endif
+                                    @if($data->status_pengambilan == 1)
+                                    
+                                        <td>Sudah Diambil</td>
+                                    
+                                    @endif
+                                  <td>{{$data->petugas_penerima}} </td>
+                                 
                   <td align="right" class="action-web">
                   <a href="{{url('penggajian',$data->id)}}" class="btn btn-default" title="Details"><i class="fa fa-eye"></i></a></td>
                                 </td>
@@ -98,9 +127,9 @@
                    
                    <a href="{{url('jabatan')}}">Jabatan</a><hr>
                    <a href="{{url('golongan')}}">Golongan</a><hr>
-                   <a href="{{url('pegawai')}}">Pegawai</a><hr>
+                   <a href="{{url('pegawai')}}">pegawai</a><hr>
                    <a href="{{url('kategori')}}">Kategori Lembur</a><hr>
-                   <a href="{{url('lemburpegawai')}}">Lembur Pegawai</a><hr>
+                   <a href="{{url('lemburpegawai')}}">Lembur pegawai</a><hr>
                    <a href="{{url('tunjangan')}}">Tunjangan</a><hr>
                    <a href="{{url('tunjanganpegawai')}}">Tunjangan Karyawan</a><hr>
                    <a href="{{url('penggajian')}}">Penggajian Karyawan</a><hr>  

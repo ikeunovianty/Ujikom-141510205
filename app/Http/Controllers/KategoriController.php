@@ -70,11 +70,10 @@ class KategoriController extends Controller
     public function edit($id)
     {   
 
-        $data = kategori_lembur::where('id',$id)->with('golongan','jabatan')->first();
-        $jabatan = jabatan::all();
         $golongan = golongan::all();
-        $kategori_lembur=kategori_lembur::find($id);
-        return view('kategori.edit',compact('kategori_lembur','jabatan','golongan','data'));
+        $jabatan = jabatan::all();
+        $kategori=kategori_lembur::find($id);
+        return view('kategori.edit',compact('kategori','golongan','jabatan'));
     }
 
     /**
@@ -86,50 +85,9 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Request::all();
-        $kode_lama = kategori_Lembur::where('id', $id)->first()->kode_lembur;
-         if ($data['kode_lembur'] != $kode_lama)
-        {
-        $rules = ['kode_lembur' => 'required|unique:kategori_lemburs',
-                  'id_jabatan' => 'required',
-                  'id_golongan' => 'required',
-                  'besaran_uang' => 'required|numeric'];
-        $sms = ['kode_lembur.required' => 'Harus Diisi',
-                'kode_lembur.unique' => 'Data Sudah Ada',
-                'id_jabatan.required' => 'Harus Diisi',
-                'id_golongan.required' => 'Harus Diisi',
-                'besaran_uang.required' => 'Harus Diisi',
-                'besaran_uang.numeric' => 'Harus Angka'];
-        }
-        else
-        {
-            $rules = [
-                  'id_jabatan' => 'required',
-                  'id_golongan' => 'required',
-                  'besaran_uang' => 'required|numeric'];
-        $sms = ['id_jabatan.required' => 'Harus Diisi',
-                'id_golongan.required' => 'Harus Diisi',
-                'besaran_uang.required' => 'Harus Diisi',
-                'besaran_uang.numeric' => 'Harus Angka'];
-        }
-        $valid=Validator::make(Input::all(),$rules,$sms);
-        if ($valid->fails()) {
-
-            alert()->error('Data Salah');  
-            return redirect('kategorilembur/'.$id.'/edit')
-            ->withErrors($valid)
-            ->withInput();
-        }
-        else
-        {
-
-        kategori_lembur::where('id', $id)->first()->update([
-            'kode_lembur'=> $data['kode_lembur'],
-            'id_jabatan'=> $data['id_jabatan'],
-            'id_golongan'=> $data['id_golongan'],
-            'besaran_uang'=> $data['besaran_uang']
-            ]);
-        }
+        $dataUpdate=Request::all();
+        $kategori=kategori_lembur::find($id);
+        $kategori->update($dataUpdate);
         return redirect('kategori');
     }
 

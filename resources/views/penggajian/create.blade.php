@@ -2,49 +2,55 @@
 
 @section('content')
 	
-<div class="col-md-9">
-        <div class="panel panel-info">
-        <div class="panel-heading" class="fa fa-paw" aria-hidden="true"><h1><center><strong>Tambah Data Penggajian</h1></strong></div>
-        <div class="panel-body">
 
-        <form class="form-horizontal" action="{{route('penggajian.store')}}" method="POST">
-                    <div class="form-group{{ $errors->has('id_pegawai') ? ' has-error' : '' }}">
-                            <label for="id_pegawai" class="col-md-4 control-label"> Pegawai :</label>
-                                <div class="col-md-6">
-                                    <select type="text" name="id_pegawai" class="form-control">
-                                        <option value="">Pilih</option>
-                                        @foreach($pegawai as $data)
-                                        <option value="{!! $data->id !!}">{!! $data->nip !!}_{!! $data->User->name !!}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('id_pegawai'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('id_pegawai') }}</strong>
-                                    </span>
-                                @endif
-                                @if (isset($_GET['errors_match']))
-                            <span class="help-block">
-                                    <strong>Pegawai sudah melakukan penggajian bulan ini</strong>
-                            </span>
-                            @endif
-                            @if (isset($missing_count))
-                            <div style="width: 100%;color: red;text-align: center;">
-                                Tunjangan Pegawai InI Tidak Ada <a href="{{url('tunjanganpegawai/create')}}">disini</a>
-                            </div>
-                            @endif
-                                </div>
-                    </div>
-          <div class="form-group">
-            <div class="col-md-6 col-md-offset-4" >
-              <button type="submit" class="btn btn-success">
-                Simpan
-              </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{{url('/penggajian')}}" class="btn btn-success">Kembali</a><br>
+                    {!! Form::open(['url'=>'penggajian'])!!}
+            <div class="form-group">
+            {!! Form::label('pegawai', 'pegawai ') !!}
+            <select class="form-control col-md-7 col-xs-12" name="tunjangan_pegawai_id">
+            <option> NIP || Nama pegawai </option>
+            @foreach($tunjanganpegawai as $data)
+                <option value="{{$data->id}}">{{$data->pegawai->nip}}&nbsp;|&nbsp;{{$data->pegawai->User->name}}</option>
+            @endforeach
+            </select>
+      </div>
+    <div class="form-group">
+            {!! Form::label('Status Pengambilan', 'Status Pengambilan ') !!}
+             <select name="status_pengambilan" class="form-control">
+                <option value="0">Belum Diambil</option>
+                <option value="1">Sudah Diambil</option>
+            </select>
+        </div>
+     <div class="col-md-6 col-sm-6 col-xs-12">
+      <span class="help-block">
+            {{$errors->first('tunjangan_pegawai_id')}}
+          </span>
+            <div>
+            @if(isset($error))
+            Check Lagi Gaji Sudah Ada
+            @endif
             </div>
+            </div>
+       <div class="form-group">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              {!! Form::submit('Simpan', ['class' => 'btn btn-success form-control']) !!}
           </div>
-        </form>
+      </div>
     </div>
-  </div>
-</div>
+    {!! Form::close() !!}
+          </div>
+          </div>
+          </div>
+          </div>     
+    </div>
+
+
+
 
 <div class="col-md-3 ">
    <div class="panel panel-default">
@@ -93,9 +99,9 @@
                    
                    <a href="{{url('jabatan')}}">Jabatan</a><hr>
                    <a href="{{url('golongan')}}">Golongan</a><hr>
-                   <a href="{{url('pegawai')}}">Pegawai</a><hr>
+                   <a href="{{url('pegawai')}}">pegawai</a><hr>
                    <a href="{{url('kategori')}}">Kategori Lembur</a><hr>
-                   <a href="{{url('lemburpegawai')}}">Lembur Pegawai</a><hr>
+                   <a href="{{url('lemburpegawai')}}">Lembur pegawai</a><hr>
                    <a href="{{url('tunjangan')}}">Tunjangan</a><hr>
                    <a href="{{url('tunjanganpegawai')}}">Tunjangan Karyawan</a><hr>
                    <a href="{{url('penggajian')}}">Penggajian Karyawan</a><hr>  

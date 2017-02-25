@@ -6,6 +6,8 @@ use Request;
 use App\jabatan;
 use App\golongan;
 use App\tunjangan;
+use Validator;
+use Input;
 
 class TunjanganController extends Controller
 {
@@ -16,10 +18,10 @@ class TunjanganController extends Controller
      */
     public function index()
     {
-         $tunjangan = tunjangan::all();
-         $jabatan = jabatan::all();
-         $golongan = golongan::all();
-        return view ('tunjangan.index', compact('tunjangan','jabatan','golongan'));
+         $tunjangan = tunjangan::with('jabatan')->get();
+        $tunjangan = tunjangan::with('golongan')->get();
+        $tunjangan = tunjangan::all();
+        return view('tunjangan.index',compact('tunjangan'));
     }
 
     /**
@@ -43,11 +45,36 @@ class TunjanganController extends Controller
      */
     public function store(Request $request)
     {
-        $jabatan=jabatan::all();
-        $golongan=golongan::all();
-        $tunjangan=Request::all();
+        $tunjangan = Request::all();
+        $rules = ['kode_tunjangan'  => 'required|unique:tunjangans',
+            'id_jabatan' => 'required',
+            'id_golongan' => 'required',
+            'status' => 'required',
+            'jumlah_anak' => 'required|numeric',
+            'besaran_uang' => 'required|numeric'];
+        $sms = ['kode_tunjangan.required' => 'Harus Diisi',
+                'kode_tunjangan.unique' => 'Data Sudah Ada',
+                'jumlah_anak.numeric' => 'Harus Angka',
+                'besaran_uang.numeric' => 'Harus Angka',
+                'id_jabatan.required' => 'Harus Diisi',
+                'id_golongan.required' => 'Harus Diisi',
+                'status.required' => 'Harus Diisi',
+                'jumlah_anak.required' => 'Harus Diisi',
+                'besaran_uang.required' => 'Harus Diisi'
+                ];
+        $valid=Validator::make(Input::all(),$rules,$sms);
+        if ($valid->fails()) {
+
+            
+            return redirect('tunjangan/create')
+            ->withErrors($valid)
+            ->withInput();
+        }
+        else
+        {
         tunjangan::create($tunjangan);
         return redirect('tunjangan');
+        }
     }
 
     /**

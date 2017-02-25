@@ -13,7 +13,7 @@
                     <button type="submit" class="btn btn-info">Pencarian</button>
                 </p></form>
         <a class="btn btn-success" href="{{url('pegawai/create')}}">Tambah Data</a><br><br>
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr class="bg-primary">
                         <th>Id</th>
@@ -37,7 +37,7 @@
                         <td> {{$data->User->email}} </td>
                         <td> {{$data->jabatan->nama_jabatan}} </td>
                         <td> {{$data->golongan->nama_golongan}} </td>
-                        <td><img src="{{asset('/account/foto/'.$data->foto.'')}}" height="100px" width="100px"></td>
+                        <td><img src="{{asset('/account/foto/'.$data->foto.'')}}" class="img-rounded" alt="Cinque Terre" width="100" height="100"></td>
                         <td><a href="{{route('pegawai.edit',$data->id)}}" class="btn btn-warning">Edit</a></td>
                         <td ><a data-toggle="modal" href="#delete{{ $data->id }}" class="btn btn-danger" title="Delete" data-toggle="tooltip">Hapus</a>
                         @include('modals.delete', ['url' => route('pegawai.destroy', $data->id),'model' => $data])

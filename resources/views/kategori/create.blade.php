@@ -10,11 +10,14 @@
 			 	{{csrf_field()}}
 
                     <div class="form-group">
+                      <div class="form-group{{ $errors->has('kode_lembur') ? ' has-error' : '' }}">
                     <label>Kode Lembur</label>
                     <input class="form-control" type="text" name="kode_lembur" placeholder="Kode Lembur ...">
                     </div>
+                    </div>
       
                     <div class="control-group">
+                      <div class="form-group{{ $errors->has('id-jabatan') ? ' has-error' : '' }}">
                         <label class="control-label">Id Jabatan</label>
                         <div class="controls">
                             <select class="form-control" name="id_jabatan">
@@ -24,8 +27,10 @@
                             </select>
                         </div>
                     </div>
+                    </div>
 
                     <div class="control-group">
+                      <div class="form-group{{ $errors->has('id_golongan') ? ' has-error' : '' }}">
                         <label class="control-label">Id Golongan</label>
                         <div class="controls">
                             <select class="form-control" name="id_golongan">
@@ -35,11 +40,15 @@
                             </select>
                         </div>
                     </div>
+                    </div>
                     
 				<div class="form-group">
+          <div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : '' }}">
 					<label>Besaran Uang</label>
 					<input class="form-control" type="text" name="besaran_uang" placeholder="Masukkan Besaran Uang">
 				</div>
+        </div>
+
 
 				<div class="form-group">
 					<input class="btn btn-success" type="submit" name="submit" value="Tambah">
